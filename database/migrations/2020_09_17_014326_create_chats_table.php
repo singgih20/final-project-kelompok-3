@@ -14,7 +14,7 @@ class CreateChatsTable extends Migration
     public function up()
     {
         Schema::create('chats', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->text("message");
             $table->string("username");
             $table->foreign("username")->references("username")->on("users")->onDelete("cascade");

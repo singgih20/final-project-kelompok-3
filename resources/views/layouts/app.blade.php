@@ -18,6 +18,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        window.Laravel = {!! json_encode([
+                'user' => [
+                    'username' => auth()->check() ? auth()->user()->username : null
+                ]
+            ]); 
+        !!}
+    </script>
 </head>
 <body>
     <div id="app">
@@ -50,6 +59,9 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('chat') }}">Chat </a>
+                                </li>
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
