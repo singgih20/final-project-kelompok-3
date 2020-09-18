@@ -10495,13 +10495,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       chats: [],
       hasChat: false,
-      fromOthers: false
+      myname: Laravel.user.username
     };
   },
   mounted: function mounted() {
@@ -74166,31 +74169,55 @@ var render = function() {
           "div",
           { staticClass: "chat-list" },
           _vm._l(_vm.chats, function(chat, index) {
-            return _c(
-              "div",
-              { key: index, staticClass: "messages card mb-2" },
-              [
-                _c("div", { staticClass: "card-body py-2 px-3" }, [
-                  _c("div", { staticClass: "user" }, [
-                    _c("strong", [_vm._v(_vm._s(chat.username))])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "message" }, [
-                    _c("pre", { staticClass: "mb-0" }, [
-                      _vm._v(_vm._s(chat.message))
+            return _c("div", { key: index }, [
+              chat.username == _vm.myname
+                ? _c("div", { staticClass: "messages card mb-2" }, [
+                    _c("div", { staticClass: "card-body py-2 px-3" }, [
+                      _c("div", { staticClass: "user" }, [
+                        _c("strong", [_vm._v(_vm._s(chat.username))])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "message" }, [
+                        _c("pre", { staticClass: "mb-0" }, [
+                          _vm._v(_vm._s(chat.message))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "time small text-muted" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(chat.created_at) +
+                            "\n                    "
+                        )
+                      ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "time small text-muted" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(chat.created_at) +
-                        "\n                "
+                  ])
+                : _c("div", { staticClass: "messages card bg-info mb-3" }, [
+                    _c(
+                      "div",
+                      { staticClass: "card-body py-2 px-3 text-right" },
+                      [
+                        _c("div", { staticClass: "user" }, [
+                          _c("strong", [_vm._v(_vm._s(chat.username))])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "message" }, [
+                          _c("pre", { staticClass: "mb-0" }, [
+                            _vm._v(_vm._s(chat.message))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "time small text-muted" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(chat.created_at) +
+                              "\n                    "
+                          )
+                        ])
+                      ]
                     )
                   ])
-                ])
-              ]
-            )
+            ])
           }),
           0
         )
@@ -86518,8 +86545,8 @@ if (token) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "c6127fe2217b3753cf2d",
-  cluster: "ap1",
+  key: 'c6127fe2217b3753cf2d',
+  cluster: 'ap1',
   encrypted: true
 });
 
@@ -86853,7 +86880,8 @@ Echo.join('chat-channel').here(function (users) {
   _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('chat-joining', users);
 }).leaving(function (users) {
   _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('chat-leaving', users);
-}).listen('ChatStoreEvent', function (e) {
+}).listen('ChatStoredEvent', function (e) {
+  console.log(e.data);
   _bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('chat-sent', e.data);
 });
 

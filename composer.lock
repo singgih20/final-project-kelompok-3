@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3383720862f95d1e7e98721a7d3fdf7c",
+    "content-hash": "319cc5f25107f0dbd6863646ba8dec28",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1425,22 +1425,22 @@
         },
         {
             "name": "pusher/pusher-php-server",
-            "version": "v4.1.4",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pusher/pusher-http-php.git",
-                "reference": "e75e5715e3b651ec20dee5844095aadefab81acb"
+                "reference": "43540be9536469f8eaec95a347d3f7532bac852c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/e75e5715e3b651ec20dee5844095aadefab81acb",
-                "reference": "e75e5715e3b651ec20dee5844095aadefab81acb",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/43540be9536469f8eaec95a347d3f7532bac852c",
+                "reference": "43540be9536469f8eaec95a347d3f7532bac852c",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "paragonie/sodium_compat": "^1.6",
-                "php": "^7.1",
+                "php": ">=7.1 <7.4",
                 "psr/log": "^1.0"
             },
             "require-dev": {
@@ -1475,7 +1475,7 @@
                 "rest",
                 "trigger"
             ],
-            "time": "2020-04-14T15:20:04+00:00"
+            "time": "2019-06-25T09:22:44+00:00"
         },
         {
             "name": "ramsey/uuid",

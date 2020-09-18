@@ -1,32 +1,35 @@
 <template>
     <div>
         <div v-if="hasChat" class="chat-list">
-            <div class="messages card mb-2" v-for="(chat, index) in chats" :key="index">
-                <div class="card-body py-2 px-3">
-                    <div class="user">
-                        <strong>{{chat.username}}</strong>
+            <div v-for="(chat, index) in chats" :key="index">
+                <div class="messages card mb-2" v-if="chat.username==myname">
+                    <div class="card-body py-2 px-3">
+                        <div class="user">
+                            <strong>{{chat.username}}</strong>
+                        </div>
+                        <div class="message">
+                            <pre class="mb-0">{{chat.message}}</pre>
+                        </div>
+                        <div class="time small text-muted">
+                            {{chat.created_at}}
+                        </div>
                     </div>
-                    <div class="message">
-                        <pre class="mb-0">{{chat.message}}</pre>
-                    </div>
-                    <div class="time small text-muted">
-                        {{chat.created_at}}
+
+                </div>
+                <div class="messages card bg-info mb-3" v-else>
+                    <div class="card-body py-2 px-3 text-right">
+                        <div class="user">
+                            <strong>{{chat.username}}</strong>
+                        </div>
+                        <div class="message">
+                            <pre class="mb-0">{{chat.message}}</pre>
+                        </div>
+                        <div class="time small text-muted">
+                            {{chat.created_at}}
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="messages card bg-info mb-3">
-                <div class="card-body text-right">
-                    <div class="user">
-                        <strong>Dedi</strong>
-                    </div>
-                    <div class="message">
-                        pesan dari dedi
-                    </div>
-                    <div class="time small text-muted">
-                        2020-08-07 23:59
-                    </div>
-                </div>
-            </div> -->
         </div>
     
         <div v-else>
@@ -47,7 +50,7 @@ export default {
         return {
             chats: [],
             hasChat: false,
-            fromOthers: false,
+            myname: Laravel.user.username,
         }
     },
     mounted(){

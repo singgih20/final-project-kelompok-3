@@ -10,6 +10,6 @@ Echo.join('chat-channel')
     .leaving(users=>{
         BusEvent.$emit('chat-leaving', users)
     })
-    .listen('ChatStoreEvent', (e) => {
+    .listen('ChatStoredEvent', (e) => {
         BusEvent.$emit('chat-sent', e.data)
     });
