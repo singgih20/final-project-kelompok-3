@@ -12,14 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('afterlogin');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('/chat', 'chat.index')->name('chat')->middleware('auth');
 
 Route::get('/chat/get-all', 'ChatController@index');
 Route::post('/chat/store', 'ChatController@store');
+Route::get('/{any?}', 'HomeController@index')->name('home');

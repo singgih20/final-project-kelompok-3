@@ -34,3 +34,4 @@ Route::middleware('auth')->group(function () {
         Route::delete('delete-book/{book}', 'BookController@destroy');
     });
 });
+Route::post('/generate', 'MidtransController@generate');

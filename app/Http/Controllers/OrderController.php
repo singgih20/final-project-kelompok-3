@@ -17,11 +17,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $getrole = Auth::user()->roles; 
+        $getrole = auth()->user()->roles;
+
         if ($getrole == 'admin') {
             $orders = Order::all();
         } else {
-            $orders = Order::where('user_id', Auth::user()->id)->get();
+            $orders = Order::where('user_id', auth()->user()->id)->get();
         }
         return OrderResource::collection($orders);
     }
@@ -35,18 +36,18 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'book_id' => ['required', 'exists:books,id'],
-            'quantity' => ['numeric', 'required', 'min:1']
+            'book_id' => ['required'],
+            'quantity' => ['numeric', 'required']
         ]);
         $getbook = Book::find(request('book_id'))->first();
-        if(request('quantity') > $getbook->stock){
-            return response()->json(['status' => 'error', 'message' => 'Jumlah stock tidak mencukupi']);
-        }
+        // if (request('quantity') > $getbook->stock) {
+        //     return response()->json(['status' => 'error', 'message' => 'Jumlah stock tidak mencukupi']);
+        // }
         $total_price = request('quantity') * $getbook->price;
         $invoice = $this->generateInvoice();
 
         $order = Order::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => request('user_id'),
             'book_id' => request('book_id'),
             'quantity' => request('quantity'),
             'total_price' => $total_price,
@@ -56,7 +57,7 @@ class OrderController extends Controller
         
         if($order){
             $updateQty = Book::find(request('book_id'));
-            $updateQty->stock = $getbook->stock - request('quantity');
+            $updateQty->stock = $updateQty->stock - request('quantity');
             $updateQty->save();
         }
         return response()->json(['status' => 'success', 'data' => $order]);
@@ -71,7 +72,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $getrole = Auth::user()->roles; 
+        $getrole = auth()->user()->roles;
         $action = strtoupper(request('action'));
         // status order 'SUBMIT', 'PROCESS', 'FINISH', 'CANCEL'
 

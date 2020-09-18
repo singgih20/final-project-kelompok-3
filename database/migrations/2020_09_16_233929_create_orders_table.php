@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->uuid('book_id')->nullable(false);
             $table->integer('quantity')->unsigned()->defaults(1);
             $table->float('total_price')->unsigned()->defaults(0);
-            $table->string('method')->default('bca');
+
             $table->string('invoice_number');
             $table->enum('status', ['SUBMIT', 'PROCESS', 'FINISH', 'CANCEL']);
 

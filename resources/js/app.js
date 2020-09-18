@@ -24,12 +24,29 @@ Vue.component('chat-user-list-component', require('./components/chat/ChatUserLis
 Vue.component('chat-message-component', require('./components/chat/ChatMessageComponent.vue').default);
 Vue.component('chat-form-component', require('./components/chat/ChatFormComponent.vue').default);
 
+
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component(
+    "example-component",
+    require("./components/ExampleComponent.vue").default
+);
+Vue.component(
+    "book-list-component",
+    require("./components/BookListComponent.vue").default
+);
+
+import VueRouter from "vue-router";
+import routes from "./router";
+Vue.use(VueRouter);
+
 const app = new Vue({
-    el: '#app',
+    el: "#app",
+    router: new VueRouter(routes)
 });

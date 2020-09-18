@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password', 'username', 'phone', 'address', 'roles'
+        'name', 'password', 'username', 'phone', 'address', 'roles', 'email'
     ];
 
     /**
@@ -71,7 +71,5 @@ class User extends Authenticatable
     public function getKeyType()
     {
         return 'string';
-    }   
-
-    
+    }
 }
