@@ -1,5 +1,6 @@
 import BookListComponent from "../components/BookListComponent";
 import OrderListComponent from "../components/OrderListComponent";
+import ChatPageComponent from "../components/chat/ChatPageComponent";
 export default {
     mode: "history",
 
@@ -13,6 +14,11 @@ export default {
             path: "/order",
             name: "order",
             component: OrderListComponent
+        },
+        {
+            path: "/chat",
+            name: "chat",
+            component: ChatPageComponent
         }
     ]
 };
